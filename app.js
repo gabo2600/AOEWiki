@@ -1,3 +1,5 @@
+// PROXY 
+
 var express = require('express');
 var path = require('path');
 let axios = require("axios");
@@ -34,7 +36,6 @@ app.get('/API/:entity/:id?', async (req, res)=> {
 app.get('/', function(req, res, next) {
     res.sendFile('index.html');
 });
-
 app.listen(app.get('port'), () => {
     console.log('escuchando puerto '+app.get('port'));
 })

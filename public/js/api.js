@@ -1,17 +1,14 @@
-import axios from 'axios';
-import '../css/style.css'
+
 
 //Funciones
 let changeEntity, drawCards, modal, modalHide, redirect;
 //cards
 let cardCiv, cardUni, cardEst, cardTec
-
 //Controles
 //Botones
 let btnCiv, btnUni, btnEst, btnTec;
 //main
 let main, mod, modalS;
-
 //Global vars
 let modalData;
 
@@ -25,12 +22,7 @@ main = document.getElementById('main');
 mod = document.getElementById('modal');
 modalS = document.getElementById('modalShadow');
 
-
 //Program
-
-
-
-
 changeEntity = async (ent) => {
     let data;
     main.innerHTML = `<h3>Please wait...</h3>`
@@ -38,8 +30,8 @@ changeEntity = async (ent) => {
     switch (ent) {
         case 1: //Civi
             try {
-                data = await axios.get("/API/civilizations");
-                data = data.data;
+                data = await fetch("/API/civilizations");
+                data = await data.json();
             } catch (e) {
                 data = {}
             }
@@ -47,24 +39,24 @@ changeEntity = async (ent) => {
             break;
         case 2: //Unidad
             try {
-                data = await axios.get("/API/units");
-                data = data.data;
+                data = await fetch("/API/units");
+                data = await data.json();
             } catch (e) {
                 data = {}
             }
             break;
         case 3: //Estruct
             try {
-                data = await axios.get("/API/structures");
-                data = data.data;
+                data = await fetch("/API/structures");
+                data = await data.json();
             } catch (e) {
                 data = {}
             }
             break;
         case 4: //Tec
             try {
-                data = await axios.get("/API/technologies");
-                data = data.data;
+                data = await fetch("/API/technologies");
+                data = await data.json();
             } catch (e) {
                 data = {}
             }
@@ -163,7 +155,6 @@ cardTec = (data) => {
 }
 
 //Modal
-
 modal = (id) => {
     let data = modalData[id - 1];
 
@@ -274,10 +265,6 @@ redirect = async (ent, name) => {
     modal(id+1);
 }
 
-
-
-
-
 //setup
 btnCiv.onclick = () => {
     changeEntity(1);
@@ -310,5 +297,5 @@ btnTec.onclick = () => {
     btnTec.className = 'active'
 }
 
-modal.className = 'hidden'
+mod.className = 'hidden'
 modalS.className = 'hidden'
